@@ -1,37 +1,20 @@
-## Welcome to GitHub Pages
+# Fast Modular Exponentiation Algorithm
 
-You can use the [editor on GitHub](https://github.com/eqchee/exponentiation/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+## About The Project
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
+<img src="https://render.githubusercontent.com/render/math?math=r = m^k mod(n)">
 
-# Header 1
-## Header 2
-### Header 3
+Modular exponentiation, shown in the formula above, is commonly used in the encryption and decryption process in the RSA Algorithm. Since a large exponent would cause the computation to be slow, we could make use of the following formula in a recursive function to improve the efficiency of the algorithm:
 
-- Bulleted
-- List
+<img src="https://render.githubusercontent.com/render/math?math=m^k = m^\frac{k}{2}*m^\frac{k}{2}">
 
-1. Numbered
-2. List
+When the exponent k is even, we would just need to calculate <img src="https://render.githubusercontent.com/render/math?math=m^\frac{k}{2}"> once. When the exponent k is odd, deduct 1 from k to make it even. The recursive function has been designed to repeat until the function reaches the base cases of `k = 0`.
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Time Complexity
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/eqchee/exponentiation/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Whenever the exponent is odd, the next call of the recursive function would be an even exponent due to the step to deduct 1 from an odd exponent. As such, there would be an even exponent value for at least one out of every two recursions. When the exponent value is even, the exponent will be halved by this algorithm. So for a given exponent to reach a value of 1, it would take at most 2*(<img src="https://render.githubusercontent.com/render/math?math=log_2 k">) steps. Thus, the time complexity of this algorithm would be O(log(k)).
